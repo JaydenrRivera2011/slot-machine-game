@@ -1,0 +1,23 @@
+{
+  "name": "slot-machine-game",
+  "version": "1.0.0",
+  "description": "A free, feature-rich slot machine game with leaderboard, achievements, and in-game economy",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "live-server",
+    "dev": "live-server --port=8000",
+    "build": "echo 'Build process'",
+    "test": "echo 'Test process'"
+  },
+  "keywords": [
+    "slot-machine",
+    "game",
+    "web-game"
+  ],
+  "author": "JaydenrRivera2011",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
