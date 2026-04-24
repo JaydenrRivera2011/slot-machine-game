@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Slot Machine - Free Forever</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Auth Screen - Page 1 -->
+    <div id="authScreen" class="screen active">
+        <div class="auth-container">
+            <h1>🎰 ULTIMATE SLOT MACHINE</h1>
+            <p class="tagline">100% Free Forever - No Payments Ever!</p>
+            
+            <div class="auth-form">
+                <h2 class="auth-subtitle">Create Your Account</h2>
+                <input type="text" id="usernameInput" placeholder="Choose your username (3-20 chars)" maxlength="20">
+                <button id="createUserBtn" class="btn-primary">Create New Account</button>
+            </div>
+
+            <div class="divider">OR</div>
+
+            <div class="existing-section">
+                <h2 class="auth-subtitle">Select Existing Account</h2>
+                <div id="existingUsers" class="existing-users"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Game Screen - Page 2 -->
+    <div id="gameScreen" class="screen">
+        <div class="game-container">
+            <!-- Top Navigation -->
+            <div class="top-nav">
+                <div class="user-welcome">
+                    <span id="welcomeUsername">Player</span>
+                </div>
+                <div class="nav-section">
+                    <button id="profileBtn" class="nav-btn">👤 Profile</button>
+                    <button id="shopBtn" class="nav-btn">🛍️ Shop</button>
+                    <button id="leaderboardBtn" class="nav-btn">🏆 Leaderboard</button>
+                    <button id="achievementsBtn" class="nav-btn">⭐ Achievements</button>
+                </div>
+                <button id="logoutBtn" class="nav-btn logout">🚪 Logout</button>
+            </div>
+
+            <!-- Currency Display -->
+            <div class="currency-display">
+                <div class="currency-item">
+                    <span class="coin-icon">🪙</span>
+                    <span id="coinsDisplay">0</span>
+                </div>
+                <div class="currency-item">
+                    <span class="gem-icon">💎</span>
+                    <span id="gemsDisplay">0</span>
+                </div>
+                <div class="currency-item clickable" id="dailyRewardBtn">
+                    <span class="daily-icon">🎁</span>
+                    <span id="dailyRewardStatus">Available</span>
+                </div>
+            </div>
+
+            <!-- Slot Machine -->
+            <div class="slot-machine">
+                <h2 class="machine-title">SPIN TO WIN!</h2>
+                
+                <div class="reels-container">
+                    <div class="reel" id="reel1">
+                        <div class="reel-item">🍎</div>
+                    </div>
+                    <div class="reel" id="reel2">
+                        <div class="reel-item">🍎</div>
+                    </div>
+                    <div class="reel" id="reel3">
+                        <div class="reel-item">🍎</div>
+                    </div>
+                </div>
+
+                <div class="bet-section">
+                    <label>Place Your Bet (Coins):</label>
+                    <div class="bet-controls">
+                        <button id="betMinusBtn" class="bet-btn">−</button>
+                        <input type="number" id="betAmount" value="10" min="1" max="1000">
+                        <button id="betPlusBtn" class="bet-btn">+</button>
+                    </div>
+                    <div class="bet-presets">
+                        <button class="preset-btn" data-amount="10">10</button>
+                        <button class="preset-btn" data-amount="50">50</button>
+                        <button class="preset-btn" data-amount="100">100</button>
+                        <button class="preset-btn" data-amount="500">500</button>
+                    </div>
+                </div>
+
+                <button id="spinBtn" class="spin-button">🎰 SPIN 🎰</button>
+
+                <div class="result-display">
+                    <p id="resultText">Ready to spin!</p>
+                    <p id="winAmount">Win: 0 coins</p>
+                </div>
+            </div>
+
+            <!-- Spin Stats -->
+            <div class="stats-display">
+                <div class="stat-item">
+                    <span>Total Spins:</span>
+                    <span id="totalSpins">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Total Wins:</span>
+                    <span id="totalWins">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Win Rate:</span>
+                    <span id="winRate">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span>Level:</span>
+                    <span id="displayLevel">1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Screen Modal -->
+    <div id="profileScreen" class="screen modal">
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+            <h2>👤 My Profile</h2>
+            
+            <div class="profile-section">
+                <h3>Account Info</h3>
+                <div class="info-item">
+                    <span>Username:</span>
+                    <span id="profileUsername">-</span>
+                </div>
+                <div class="info-item">
+                    <span>Account Created:</span>
+                    <span id="profileCreatedDate">-</span>
+                </div>
+                <div class="info-item">
+                    <span>Level:</span>
+                    <span id="profileLevel">1</span>
+                </div>
+                <div class="info-item">
+                    <span>Total Coins Earned:</span>
+                    <span id="profileTotalCoins">0</span>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>🎨 Cosmetics & Skins</h3>
+                <p class="cosmetics-info">Click a cosmetic to apply it to your reels</p>
+                <div class="cosmetics-list" id="cosmeticsList"></div>
+            </div>
+
+            <div class="profile-section">
+                <h3>⚙️ Settings</h3>
+                <label class="setting-item">
+                    <input type="checkbox" id="soundToggle" checked>
+                    <span>🔊 Sound Effects</span>
+                </label>
+                <label class="setting-item">
+                    <input type="checkbox" id="musicToggle" checked>
+                    <span>🎵 Background Music</span>
+                </label>
+                <label class="setting-item">
+                    <input type="checkbox" id="notificationsToggle" checked>
+                    <span>🔔 Notifications</span>
+                </label>
+                <label class="setting-item">
+                    <input type="checkbox" id="autoSpinToggle">
+                    <span>⚡ Auto Spin (5 times)</span>
+                </label>
+            </div>
+
+            <div class="profile-section">
+                <h3>🎭 Display Customization</h3>
+                <label class="setting-item">
+                    <span>Reel Theme:</span>
+                    <select id="reelTheme">
+                        <option value="classic">Classic</option>
+                        <option value="neon">Neon</option>
+                        <option value="dark">Dark</option>
+                        <option value="golden">Golden</option>
+                    </select>
+                </label>
+                <label class="setting-item">
+                    <span>Animation Speed:</span>
+                    <input type="range" id="animationSpeed" min="1" max="5" value="3">
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shop Screen Modal -->
+    <div id="shopScreen" class="screen modal">
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+            <h2>🛍️ Shop - 50 Unique Items!</h2>
+            
+            <div class="shop-tabs">
+                <button class="shop-tab active" data-tab="upgrades">💪 Upgrades (Coins)</button>
+                <button class="shop-tab" data-tab="cosmetics">✨ Cosmetics (Gems)</button>
+                <button class="shop-tab" data-tab="boosters">🚀 Boosters (Both)</button>
+                <button class="shop-tab" data-tab="special">🎁 Special Items</button>
+            </div>
+
+            <div class="shop-items" id="shopItems"></div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Screen Modal -->
+    <div id="leaderboardScreen" class="screen modal">
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+            <h2>🏆 Global Leaderboard</h2>
+            
+            <div class="leaderboard-filters">
+                <button class="filter-btn active" data-filter="wealth">💰 Wealth</button>
+                <button class="filter-btn" data-filter="spins">🎰 Spins</button>
+                <button class="filter-btn" data-filter="wins">🎉 Wins</button>
+                <button class="filter-btn" data-filter="level">📈 Level</button>
+            </div>
+
+            <div class="leaderboard-list" id="leaderboardList">
+                <p class="loading">Loading leaderboard...</p>
+            </div>
+
+            <div class="leaderboard-stats">
+                <h3>Your Rank</h3>
+                <div id="myRankInfo"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievements Screen Modal -->
+    <div id="achievementsScreen" class="screen modal">
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+            <h2>⭐ Achievements & Challenges</h2>
+            
+            <div class="achievements-tabs">
+                <button class="ach-tab active" data-tab="daily">📅 Daily Challenges</button>
+                <button class="ach-tab" data-tab="goals">🎯 Goals</button>
+                <button class="ach-tab" data-tab="achievements">⭐ Badges</button>
+            </div>
+
+            <div class="achievements-list" id="achievementsList"></div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notificationToast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
